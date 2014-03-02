@@ -3,7 +3,6 @@
 
 #include "spec_helper.h"
 #include "board.h"
-#include "minimax.h"
 
 void success(void) {
   char* success = "\x1B[32m.";
@@ -24,20 +23,3 @@ char* draw_board(void) {
   return board;
 }
 
-void play_all_games(char* board, char first, char second, char ai) {
-  if (winner(board) == ai || is_draw(board)) return;
-  if (first == ai) {
-    int move = next_move(board, first, second);
-    make_move(board, move, first);
-    play_all_games(board, second, first, ai);
-    unset_move(board, move);
-  } else {
-    for(int i = 0; i < SIZE; i++) {
-      if (make_move(board, i, first) != -1) {
-        assert(winner(board) == EMPTY || winner(board) == ai);
-        play_all_games(board, second, first, ai);
-        unset_move(board, i);
-      }
-    }
-  }
-}

@@ -6,6 +6,25 @@
 #include "minimax.h"
 #include "board.h"
 
+void play_all_games(char* board, char first, char second, char ai) {
+  if (winner(board) == ai || is_draw(board)) return;
+  if (first == ai) {
+    int move = next_move(board, first, second);
+    make_move(board, move, first);
+    assert(winner(board) == EMPTY || winner(board) == ai);
+    play_all_games(board, second, first, ai);
+    unset_move(board, move);
+  } else {
+    for(int i = 0; i < SIZE; i++) {
+      if (make_move(board, i, first) != -1) {
+        assert(winner(board) == EMPTY);
+        play_all_games(board, second, first, ai);
+        unset_move(board, i);
+      }
+    }
+  }
+}
+
 void test_empty_board() {
   char* board = new_board();
   int move = next_move(board, 'X', 'O');

@@ -1,3 +1,4 @@
 spec
 main
 bin/*
+spec.dSYM/*
