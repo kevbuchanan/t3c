@@ -43,11 +43,6 @@ int next_move(char* board, char piece, char other_piece) {
     }
   }
 
-  for(int i = 0; i < SIZE; i++) {
-    printf("%d ", scores[i]);
-  }
-  puts("");
-
   int space;
   int max = -100;
   for(int i = 0; i < SIZE; i++) {

@@ -25,6 +25,7 @@ char* draw_board(void) {
 }
 
 void play_all_games(char* board, char first, char second, char ai) {
+  if (winner(board) == ai || is_draw(board)) return;
   if (first == ai) {
     int move = next_move(board, first, second);
     make_move(board, move, first);

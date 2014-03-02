@@ -9,7 +9,7 @@
 void test_empty_board() {
   char* board = new_board();
   int move = next_move(board, 'X', 'O');
-  assert(move == 4);
+  assert(move == 0);
   free_board(board);
 }
 
@@ -54,7 +54,7 @@ void minimax_test() {
   test_empty_board();
   test_take_win();
   test_take_draw();
-//  test_never_loses_going_first();
-//  test_never_loses_going_second();
+  test_never_loses_going_first();
+  test_never_loses_going_second();
   success();
 }
