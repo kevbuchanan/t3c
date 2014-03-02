@@ -1,19 +1,24 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 #include "board.h"
 
-char* new_board(void) {
-  char* board = malloc(SIZE * sizeof(char));
+char* new_board() {
+  char* board = malloc(SIZE * sizeof(char) + 1);
 
-  char board_string[SIZE + 1];
+  char board_string[SIZE + 1] = "";
   for(int i = 0; i < SIZE; i++) {
     board_string[i] = EMPTY;
   }
 
   strcpy(board, board_string);
   return board;
+}
+
+void free_board(char* board) {
+  free(board);
 }
 
 bool valid_move(char* board, int space) {
@@ -27,6 +32,10 @@ int make_move(char* board, int space, char piece) {
   } else {
     return -1;
   }
+}
+
+void unset_move(char* board, int space) {
+  board[space] = EMPTY;
 }
 
 int empty_count(char* board) {
