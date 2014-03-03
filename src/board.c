@@ -17,7 +17,7 @@ char* new_board() {
   return board;
 }
 
-void free_board(char* board) {
+void destroy_board(char* board) {
   free(board);
 }
 

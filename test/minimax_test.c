@@ -1,6 +1,4 @@
 #include <assert.h>
-#include <string.h>
-#include <stdio.h>
 
 #include "spec_helper.h"
 #include "minimax.h"
@@ -29,7 +27,7 @@ void test_empty_board() {
   char* board = new_board();
   int move = next_move(board, 'X', 'O');
   assert(move == 4);
-  free_board(board);
+  destroy_board(board);
 }
 
 void test_take_win() {
@@ -40,7 +38,7 @@ void test_take_win() {
   make_move(board, 4, 'O');
   int move = next_move(board, 'X', 'O');
   assert(move == 2);
-  free_board(board);
+  destroy_board(board);
 }
 
 void test_take_draw() {
@@ -54,19 +52,19 @@ void test_take_draw() {
   make_move(board, 6, 'O');
   int move = next_move(board, 'O', 'X');
   assert(move == 8);
-  free_board(board);
+  destroy_board(board);
 }
 
 void test_never_loses_going_first() {
   char* board = new_board();
   play_all_games(board, 'X', 'O', 'X');
-  free_board(board);
+  destroy_board(board);
 }
 
 void test_never_loses_going_second() {
   char* board = new_board();
   play_all_games(board, 'X', 'O', 'O');
-  free_board(board);
+  destroy_board(board);
 }
 
 void minimax_test() {

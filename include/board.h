@@ -8,7 +8,7 @@
 #define EMPTY '-'
 
 char* new_board();
-void free_board(char* board);
+void destroy_board(char* board);
 int make_move(char* board, int space, char piece);
 void unset_move(char* board, int space);
 bool is_full(char* board);

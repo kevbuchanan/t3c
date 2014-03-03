@@ -1,6 +1,5 @@
 #include <assert.h>
 #include <string.h>
-#include <stdio.h>
 
 #include "spec_helper.h"
 #include "board.h"
@@ -8,20 +7,20 @@
 void test_new_board() {
   char* board = new_board();
   assert(strcmp(board, "---------") == 0);
-  free_board(board);
+  destroy_board(board);
 }
 
 void test_change_board() {
   char* board = new_board();
   make_move(board, 0, 'X');
   assert(board[0] == 'X');
-  free_board(board);
+  destroy_board(board);
 }
 
 void test_board_not_full() {
   char* board = new_board();
   assert(!is_full(board));
-  free_board(board);
+  destroy_board(board);
 }
 
 void test_board_is_full() {
@@ -30,13 +29,13 @@ void test_board_is_full() {
     make_move(board, i, 'X');
   }
   assert(is_full(board));
-  free_board(board);
+  destroy_board(board);
 }
 
 void test_board_is_empty() {
   char* board = new_board();
   assert(is_empty(board));
-  free_board(board);
+  destroy_board(board);
 }
 
 void test_board_is_won_row() {
@@ -46,7 +45,7 @@ void test_board_is_won_row() {
   make_move(board, 1, 'X');
   make_move(board, 2, 'X');
   assert(is_won(board));
-  free_board(board);
+  destroy_board(board);
 }
 
 void test_board_is_won_column() {
@@ -56,7 +55,7 @@ void test_board_is_won_column() {
   make_move(board, 3, 'X');
   make_move(board, 6, 'X');
   assert(is_won(board));
-  free_board(board);
+  destroy_board(board);
 }
 
 void test_board_is_won_diag1() {
@@ -66,7 +65,7 @@ void test_board_is_won_diag1() {
   make_move(board, 4, 'X');
   make_move(board, 8, 'X');
   assert(is_won(board));
-  free_board(board);
+  destroy_board(board);
 }
 
 void test_board_is_won_diag2() {
@@ -76,7 +75,7 @@ void test_board_is_won_diag2() {
   make_move(board, 4, 'X');
   make_move(board, 6, 'X');
   assert(is_won(board));
-  free_board(board);
+  destroy_board(board);
 }
 
 void test_board_finds_winner() {
@@ -87,7 +86,7 @@ void test_board_finds_winner() {
   make_move(board, 0, 'O');
   make_move(board, 6, 'X');
   assert(winner(board) == 'X');
-  free_board(board);
+  destroy_board(board);
 }
 
 void test_board_is_done() {
@@ -96,26 +95,26 @@ void test_board_is_done() {
   make_move(board, 7, 'X');
   make_move(board, 8, 'X');
   assert(is_done(board));
-  free_board(board);
+  destroy_board(board);
 }
 
 void test_board_is_draw() {
   char* board = draw_board();
   assert(is_draw(board));
-  free_board(board);
+  destroy_board(board);
 }
 
 void test_board_invalid_move_when_taken() {
   char* board = new_board();
   make_move(board, 0, 'X');
   assert(make_move(board, 0, 'O') == -1);
-  free_board(board);
+  destroy_board(board);
 }
 
 void test_board_invalid_move_when_out_of_range() {
   char* board = new_board();
   assert(make_move(board, 9, 'O') == -1);
-  free_board(board);
+  destroy_board(board);
 }
 
 void board_test() {
