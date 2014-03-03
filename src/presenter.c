@@ -12,3 +12,11 @@ void show_board(char* board) {
 void show_message(char* message) {
   write(message);
 }
+
+int ask_for_move(void) {
+  char input[3];
+  int move;
+  fgets(input, 3, stdin);
+  sscanf(input, "%d", &move);
+  return move;
+}

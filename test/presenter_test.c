@@ -1,6 +1,5 @@
 #include <assert.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #include "presenter.h"
@@ -23,15 +22,34 @@ void test_display_played_board() {
   assert(strcmp(writer_log, expected) == 0);
 }
 
+void test_display_message() {
+  char message[] = "Testing the presenter";
+  show_message(message);
+  assert(strcmp(writer_log, message) == 0);
+}
+
+void test_get_move() {
+  freopen("test/test_input.txt", "r", stdin);
+  int move = ask_for_move();
+  assert(move == 5);
+}
+
 void presenter_test() {
   init_log();
 
   test_display_empty_board();
+  reset_log();
   success();
 
-  reset_log();
-
   test_display_played_board();
+  reset_log();
+  success();
+
+  test_display_message();
+  reset_log();
+  success();
+
+  test_get_move();
   success();
 
   destroy_log();
