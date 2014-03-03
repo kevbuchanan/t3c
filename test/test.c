@@ -1,10 +1,10 @@
 #include "spec_helper.h"
 
-#include "board_test.c"
-#include "minimax_test.c"
-#include "player_test.c"
-#include "presenter_test.c"
-#include "game_test.c"
+#include "board_test.h"
+#include "minimax_test.h"
+#include "player_test.h"
+#include "presenter_test.h"
+#include "game_test.h"
 
 void run_suite() {
   board_test();

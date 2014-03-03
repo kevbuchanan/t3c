@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "spec_helper.h"
+#include "presenter_test.h"
 #include "presenter.h"
 #include "board.h"
 #include "writer.h"
@@ -29,7 +31,7 @@ void test_display_message() {
 }
 
 void test_get_move() {
-  freopen("test/test_input.txt", "r", stdin);
+  freopen("fixtures/test_input.txt", "r", stdin);
   char* board = new_board();
   int move = ask_for_move(board, 'X', 'O');
   destroy_board(board);

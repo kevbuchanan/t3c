@@ -1,6 +1,7 @@
 #include <assert.h>
 
 #include "spec_helper.h"
+#include "player_test.h"
 #include "player.h"
 #include "board.h"
 

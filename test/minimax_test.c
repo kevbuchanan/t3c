@@ -1,6 +1,7 @@
 #include <assert.h>
 
 #include "spec_helper.h"
+#include "minimax_test.h"
 #include "minimax.h"
 #include "board.h"
 

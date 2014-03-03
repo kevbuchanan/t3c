@@ -2,7 +2,9 @@
 #include <string.h>
 
 #include "spec_helper.h"
+#include "game_test.h"
 #include "game.h"
+#include "board.h"
 #include "writer.h"
 #include "player.h"
 

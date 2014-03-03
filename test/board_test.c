@@ -2,6 +2,7 @@
 #include <string.h>
 
 #include "spec_helper.h"
+#include "board_test.h"
 #include "board.h"
 
 void test_new_board() {
