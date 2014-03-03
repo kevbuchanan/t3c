@@ -3,6 +3,7 @@
 #include "writer.h"
 
 void show_board(char* board) {
+  write("\n");
   for(int i = 0; i < 9; i++) {
     write_char("%c ", board[i]);
     if (i % 3 == 2) write("\n");
@@ -13,7 +14,7 @@ void show_message(char* message) {
   write(message);
 }
 
-int ask_for_move(void) {
+int ask_for_move(char* board, char piece, char other_piece) {
   char input[3];
   int move;
   fgets(input, 3, stdin);

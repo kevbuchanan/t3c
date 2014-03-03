@@ -3,7 +3,7 @@
 
 #include "board.h"
 
-int minimax(void* board, char piece, char other_piece, int depth, bool is_min, char ai) {
+int minimax(char* board, char piece, char other_piece, int depth, bool is_min, char ai) {
   if (winner(board) == ai) return 50 - depth;
   if (winner(board) == other_piece) return -(50 - depth);
   if (is_draw(board)) return 0;
@@ -50,7 +50,7 @@ int minimax(void* board, char piece, char other_piece, int depth, bool is_min, c
   }
 }
 
-int next_move(void* board, char piece, char other_piece) {
+int next_move(char* board, char piece, char other_piece) {
   if (is_empty(board)) return 4;
   return minimax(board, piece, other_piece, 0, false, piece);
 }

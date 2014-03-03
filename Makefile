@@ -2,11 +2,11 @@ CFLAGS = -Wall
 
 all: spec main
 
-spec: bin/test.o bin/spec_helper.o bin/board.o bin/presenter.o bin/minimax.o bin/player.o bin/test_writer.o
-	cc -o spec bin/test.o bin/spec_helper.o bin/board.o bin/presenter.o bin/minimax.o bin/player.o bin/test_writer.o
+spec: bin/test.o bin/spec_helper.o bin/board.o bin/presenter.o bin/minimax.o bin/player.o bin/test_writer.o bin/game.o
+	cc -o spec bin/test.o bin/spec_helper.o bin/board.o bin/presenter.o bin/minimax.o bin/player.o bin/test_writer.o bin/game.o
 
-main: bin/main.o bin/board.o bin/presenter.o bin/minimax.o bin/player.o bin/writer.o
-	cc -o main bin/main.o bin/board.o bin/presenter.o bin/minimax.o bin/player.o bin/writer.o
+main: bin/main.o bin/board.o bin/presenter.o bin/minimax.o bin/player.o bin/writer.o bin/game.o
+	cc -o main bin/main.o bin/board.o bin/presenter.o bin/minimax.o bin/player.o bin/writer.o bin/game.o
 
 bin/test.o: test/test.c
 	cc -I include -c -o bin/test.o test/test.c
@@ -28,6 +28,9 @@ bin/player.o: src/player.c
 
 bin/writer.o: src/writer.c
 	cc -I include -c -o bin/writer.o src/writer.c
+
+bin/game.o: src/game.c
+	cc -I include -c -o bin/game.o src/game.c
 
 bin/test_writer.o: test/test_writer.c
 	cc -I include -c -o bin/test_writer.o test/test_writer.c

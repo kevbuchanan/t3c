@@ -8,7 +8,7 @@
 
 void test_display_empty_board() {
   char* board = new_board();
-  char expected[] = "- - - \n- - - \n- - - \n";
+  char expected[] = "\n- - - \n- - - \n- - - \n";
   show_board(board);
   destroy_board(board);
   assert(strcmp(writer_log, expected) == 0);
@@ -16,7 +16,7 @@ void test_display_empty_board() {
 
 void test_display_played_board() {
   char* board = draw_board();
-  char expected[] = "X O X \nO X O \nO X O \n";
+  char expected[] = "\nX O X \nO X O \nO X O \n";
   show_board(board);
   destroy_board(board);
   assert(strcmp(writer_log, expected) == 0);
@@ -30,7 +30,9 @@ void test_display_message() {
 
 void test_get_move() {
   freopen("test/test_input.txt", "r", stdin);
-  int move = ask_for_move();
+  char* board = new_board();
+  int move = ask_for_move(board, 'X', 'O');
+  destroy_board(board);
   assert(move == 5);
 }
 
