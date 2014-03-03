@@ -14,7 +14,7 @@ void play_all_games(char* board, char first, char second, char ai) {
     play_all_games(board, second, first, ai);
     unset_move(board, move);
   } else {
-    for(int i = 0; i < SIZE; i++) {
+    for(int i = 0; i < get_size(board); i++) {
       if (make_move(board, i, first) != -1) {
         assert(winner(board) == EMPTY);
         play_all_games(board, second, first, ai);

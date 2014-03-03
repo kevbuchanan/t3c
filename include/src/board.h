@@ -3,12 +3,12 @@
 
 #include <stdbool.h>
 
-#define SIZE 9
-#define FACTOR 3
 #define EMPTY '-'
 
 char* new_board();
+int get_size(char* board);
 void destroy_board(char* board);
+bool is_valid_move(char* board, int space);
 int make_move(char* board, int space, char piece);
 void unset_move(char* board, int space);
 bool is_full(char* board);

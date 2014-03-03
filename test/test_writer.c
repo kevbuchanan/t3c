@@ -25,7 +25,7 @@ void write(char* string) {
 }
 
 void write_char(char* string, char sub) {
-  char output[100];
+  char output[20];
   sprintf(output, string, sub);
   add_to_log(output);
 }

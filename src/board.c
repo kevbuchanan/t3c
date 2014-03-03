@@ -5,6 +5,9 @@
 
 #include "board.h"
 
+#define SIZE 9
+#define FACTOR 3
+
 char* new_board() {
   char* board = malloc(SIZE * sizeof(char) + 1);
 
@@ -17,16 +20,20 @@ char* new_board() {
   return board;
 }
 
+int get_size(char* board) {
+  return SIZE;
+}
+
 void destroy_board(char* board) {
   free(board);
 }
 
-bool valid_move(char* board, int space) {
+bool is_valid_move(char* board, int space) {
   return space < SIZE && board[space] == EMPTY;
 }
 
 int make_move(char* board, int space, char piece) {
-  if (valid_move(board, space)) {
+  if (is_valid_move(board, space)) {
     board[space] = piece;
     return 0;
   } else {
@@ -143,22 +150,6 @@ char check_diag2(char* board) {
   return EMPTY;
 }
 
-bool is_won(char* board) {
-  if (check_rows(board) != EMPTY) {
-    return true;
-  }
-  if (check_cols(board) != EMPTY) {
-    return true;
-  }
-  if (check_diag1(board) != EMPTY) {
-    return true;
-  }
-  if (check_diag2(board) != EMPTY) {
-    return true;
-  }
-  return false;
-}
-
 char winner(char* board) {
   char piece;
   if ((piece = check_rows(board)) != EMPTY) {
@@ -174,6 +165,10 @@ char winner(char* board) {
     return piece;
   }
   return EMPTY;
+}
+
+bool is_won(char* board) {
+  return winner(board) != EMPTY;
 }
 
 bool is_draw(char* board) {

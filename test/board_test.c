@@ -105,6 +105,21 @@ void test_board_is_draw() {
   destroy_board(board);
 }
 
+void test_valid_move() {
+  char* board = new_board();
+  bool check = is_valid_move(board, 0);
+  assert(check);
+  destroy_board(board);
+}
+
+void test_invalid_move() {
+  char* board = new_board();
+  make_move(board, 0, 'X');
+  bool check = is_valid_move(board, 0);
+  assert(!check);
+  destroy_board(board);
+}
+
 void test_board_invalid_move_when_taken() {
   char* board = new_board();
   make_move(board, 0, 'X');
@@ -142,6 +157,10 @@ void board_test() {
   test_board_is_done();
   success();
   test_board_is_draw();
+  success();
+  test_valid_move();
+  success();
+  test_invalid_move();
   success();
   test_board_invalid_move_when_taken();
   success();

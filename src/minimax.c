@@ -8,13 +8,14 @@ int minimax(char* board, char piece, char other_piece, int depth, bool is_min, c
   if (winner(board) == other_piece) return -(50 - depth);
   if (is_draw(board)) return 0;
 
+  int board_size = get_size(board);
   int space;
 
   if (is_min) {
 
     int min = 100;
 
-    for(int i = 0; i < SIZE; i++) {
+    for(int i = 0; i < board_size; i++) {
       if (make_move(board, i, piece) != -1) {
         int score = minimax(board, other_piece, piece, depth + 1, false, ai);
         if (score < min) {
@@ -31,7 +32,7 @@ int minimax(char* board, char piece, char other_piece, int depth, bool is_min, c
 
     int max = -100;
 
-    for(int i = 0; i < SIZE; i++) {
+    for(int i = 0; i < board_size; i++) {
       if (make_move(board, i, piece) != -1) {
         int score = minimax(board, other_piece, piece, depth + 3, true, ai);
         if (score > max) {
