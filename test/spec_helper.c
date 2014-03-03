@@ -3,9 +3,18 @@
 #include "spec_helper.h"
 #include "board.h"
 
+static int test_count = 0;
+
 void success(void) {
   char* success = "\x1B[32m.";
   printf("%s", success);
+  test_count++;
+}
+
+void show_results(void) {
+  puts("\n");
+  printf("Completed %d tests\n", test_count);
+  puts("");
 }
 
 char* draw_board(void) {
