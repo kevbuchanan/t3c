@@ -13,8 +13,8 @@ struct _Board {
 };
 
 Board* new_board() {
-  Board* board = (Board*)malloc(sizeof(Board));
-  board->spaces = malloc(SIZE + 1);
+  Board* board = malloc(sizeof(Board));
+  board->spaces = malloc(SIZE * sizeof(char) + 1);
 
   char board_string[SIZE + 1] = "";
   for(int i = 0; i < SIZE; i++) {
