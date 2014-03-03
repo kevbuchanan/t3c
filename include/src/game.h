@@ -3,6 +3,6 @@
 
 #include "player.h"
 
-void start_game(char* board, Player* player1, Player* player2);
+void start_game(Board* board, Player* player1, Player* player2);
 
 #endif

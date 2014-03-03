@@ -5,7 +5,7 @@
 #include "minimax.h"
 #include "board.h"
 
-void play_all_games(char* board, char first, char second, char ai) {
+void play_all_games(Board* board, char first, char second, char ai) {
   if (winner(board) == ai || is_draw(board)) return;
   if (first == ai) {
     int move = next_move(board, first, second);
@@ -25,14 +25,14 @@ void play_all_games(char* board, char first, char second, char ai) {
 }
 
 void test_empty_board() {
-  char* board = new_board();
+  Board* board = new_board();
   int move = next_move(board, 'X', 'O');
   assert(move == 4);
   destroy_board(board);
 }
 
 void test_take_win() {
-  char* board = new_board();
+  Board* board = new_board();
   make_move(board, 0, 'X');
   make_move(board, 3, 'O');
   make_move(board, 1, 'X');
@@ -43,7 +43,7 @@ void test_take_win() {
 }
 
 void test_take_draw() {
-  char* board = new_board();
+  Board* board = new_board();
   make_move(board, 0, 'X');
   make_move(board, 1, 'O');
   make_move(board, 2, 'X');
@@ -57,13 +57,13 @@ void test_take_draw() {
 }
 
 void test_never_loses_going_first() {
-  char* board = new_board();
+  Board* board = new_board();
   play_all_games(board, 'X', 'O', 'X');
   destroy_board(board);
 }
 
 void test_never_loses_going_second() {
-  char* board = new_board();
+  Board* board = new_board();
   play_all_games(board, 'X', 'O', 'O');
   destroy_board(board);
 }

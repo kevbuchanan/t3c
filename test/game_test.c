@@ -9,7 +9,7 @@
 #include "player.h"
 
 void test_shows_draw() {
-  char* board = draw_board();
+  Board* board = draw_board();
   Player* p1 = create_player('X', &fake_move);
   Player* p2 = create_player('O', &fake_move);
   start_game(board, p1, p2);
@@ -21,7 +21,7 @@ void test_shows_draw() {
 }
 
 void test_shows_win() {
-  char* board = draw_board();
+  Board* board = draw_board();
   unset_move(board, 0);
   Player* p1 = create_player('O', &fake_move);
   Player* p2 = create_player('X', &fake_move);
@@ -37,7 +37,7 @@ void test_shows_win() {
 }
 
 void test_gets_valid_move() {
-  char* board = draw_board();
+  Board* board = draw_board();
   unset_move(board, 1);
   Player* p1 = create_player('X', &incrementing_move);
   Player* p2 = create_player('O', &fake_move);
@@ -56,7 +56,7 @@ void test_gets_valid_move() {
 }
 
 void test_switches_turns() {
-  char* board = draw_board();
+  Board* board = draw_board();
   unset_move(board, 0);
   unset_move(board, 1);
   Player* p1 = create_player('X', &incrementing_move);

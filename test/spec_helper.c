@@ -17,20 +17,20 @@ void show_results(void) {
   puts("");
 }
 
-int fake_move(char* board, char piece, char other_piece) {
+int fake_move(Board* board, char piece, char other_piece) {
   return 0;
 }
 
 int current_move = 0;
 
-int incrementing_move(char* board, char piece, char other_piece) {
+int incrementing_move(Board* board, char piece, char other_piece) {
   int move = current_move;
   current_move++;
   return move;
 }
 
-char* draw_board(void) {
-  char* board = new_board();
+Board* draw_board(void) {
+  Board* board = new_board();
   make_move(board, 0, 'X');
   make_move(board, 1, 'O');
   make_move(board, 2, 'X');

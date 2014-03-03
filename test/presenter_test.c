@@ -9,7 +9,7 @@
 #include "writer.h"
 
 void test_display_empty_board() {
-  char* board = new_board();
+  Board* board = new_board();
   char expected[] = "\n- - - \n- - - \n- - - \n";
   show_board(board);
   destroy_board(board);
@@ -17,7 +17,7 @@ void test_display_empty_board() {
 }
 
 void test_display_played_board() {
-  char* board = draw_board();
+  Board* board = draw_board();
   char expected[] = "\nX O X \nO X O \nO X O \n";
   show_board(board);
   destroy_board(board);
@@ -32,7 +32,7 @@ void test_display_message() {
 
 void test_get_move() {
   freopen("fixtures/test_input.txt", "r", stdin);
-  char* board = new_board();
+  Board* board = new_board();
   int move = ask_for_move(board, 'X', 'O');
   destroy_board(board);
   assert(move == 5);

@@ -5,7 +5,7 @@
 #include "presenter.h"
 
 int main() {
-  char* board = new_board();
+  Board* board = new_board();
 
   Player* player1 = create_player('X', &ask_for_move);
   Player* player2 = create_player('O', &next_move);

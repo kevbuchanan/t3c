@@ -5,17 +5,21 @@
 
 #define EMPTY '-'
 
-char* new_board();
-int get_size(char* board);
-void destroy_board(char* board);
-bool is_valid_move(char* board, int space);
-int make_move(char* board, int space, char piece);
-void unset_move(char* board, int space);
-bool is_full(char* board);
-bool is_empty(char* board);
-bool is_won(char* board);
-bool is_done(char* board);
-bool is_draw(char* board);
-char winner(char* board);
+typedef struct Board {
+  char* spaces;
+} Board;
+
+Board* new_board();
+int get_size(Board* board);
+void destroy_board(Board* board);
+int make_move(Board* board, int space, char piece);
+void unset_move(Board* board, int space);
+bool is_valid_move(Board* board, int space);
+bool is_full(Board* board);
+bool is_empty(Board* board);
+bool is_won(Board* board);
+bool is_done(Board* board);
+bool is_draw(Board* board);
+char winner(Board* board);
 
 #endif
