@@ -13,6 +13,12 @@ void test_new_board() {
   destroy_board(board);
 }
 
+void test_board_factor() {
+  Board* board = new_board();
+  assert(get_factor(board) == 3);
+  destroy_board(board);
+}
+
 void test_change_board() {
   Board* board = new_board();
   make_move(board, 0, 'X');
@@ -137,6 +143,8 @@ void test_board_invalid_move_when_out_of_range() {
 
 void board_test() {
   test_new_board();
+  success();
+  test_board_factor();
   success();
   test_change_board();
   success();

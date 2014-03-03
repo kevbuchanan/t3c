@@ -9,6 +9,7 @@ typedef struct _Board Board;
 
 Board* new_board();
 int get_size(Board* board);
+int get_factor(Board* board);
 char get_space(Board* board, int space);
 void destroy_board(Board* board);
 int make_move(Board* board, int space, char piece);

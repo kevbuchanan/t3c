@@ -5,9 +5,11 @@
 
 void show_board(Board* board) {
   write("\n");
-  for(int i = 0; i < 9; i++) {
+  int size = get_size(board);
+  int factor = get_factor(board);
+  for(int i = 0; i < size; i++) {
     write_char("%c ", get_space(board, i));
-    if (i % 3 == 2) write("\n");
+    if (i % factor == factor - 1) write("\n");
   }
 }
 

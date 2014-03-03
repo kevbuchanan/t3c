@@ -33,6 +33,10 @@ int get_size(Board* board) {
   return SIZE;
 }
 
+int get_factor(Board* board) {
+  return FACTOR;
+}
+
 void destroy_board(Board* board) {
   free(board->spaces);
   free(board);
