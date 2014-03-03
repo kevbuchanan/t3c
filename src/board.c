@@ -8,6 +8,10 @@
 #define SIZE 9
 #define FACTOR 3
 
+struct _Board {
+  char* spaces;
+};
+
 Board* new_board() {
   Board* board = (Board*)malloc(sizeof(Board));
   board->spaces = malloc(SIZE + 1);
@@ -19,6 +23,10 @@ Board* new_board() {
 
   strcpy(board->spaces, board_string);
   return board;
+}
+
+char get_space(Board* board, int space) {
+  return board->spaces[space];
 }
 
 int get_size(Board* board) {

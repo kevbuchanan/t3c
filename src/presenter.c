@@ -6,7 +6,7 @@
 void show_board(Board* board) {
   write("\n");
   for(int i = 0; i < 9; i++) {
-    write_char("%c ", board->spaces[i]);
+    write_char("%c ", get_space(board, i));
     if (i % 3 == 2) write("\n");
   }
 }

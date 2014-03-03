@@ -7,14 +7,16 @@
 
 void test_new_board() {
   Board* board = new_board();
-  assert(strcmp(board->spaces, "---------") == 0);
+  for(int i = 0; i < 9; i++) {
+    assert(get_space(board, i) == '-');
+  }
   destroy_board(board);
 }
 
 void test_change_board() {
   Board* board = new_board();
   make_move(board, 0, 'X');
-  assert(board->spaces[0] == 'X');
+  assert(get_space(board, 0) == 'X');
   destroy_board(board);
 }
 

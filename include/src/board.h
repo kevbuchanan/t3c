@@ -5,12 +5,11 @@
 
 #define EMPTY '-'
 
-typedef struct Board {
-  char* spaces;
-} Board;
+typedef struct _Board Board;
 
 Board* new_board();
 int get_size(Board* board);
+char get_space(Board* board, int space);
 void destroy_board(Board* board);
 int make_move(Board* board, int space, char piece);
 void unset_move(Board* board, int space);
