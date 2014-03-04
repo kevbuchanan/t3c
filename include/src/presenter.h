@@ -5,6 +5,7 @@
 
 void show_board(Board* board);
 void show_turn(int turn);
+void show_invalid_move(void);
 void show_winner(char winner);
 void show_draw(void);
 int ask_for_move(Board* board, char piece, char other_piece);

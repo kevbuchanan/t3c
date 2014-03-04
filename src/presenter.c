@@ -46,7 +46,12 @@ void show_turn(int turn) {
   show_messagef("\nPlayer %d's turn\n", turn);
 }
 
+void show_invalid_move(void) {
+  show_message("\nInvalid move\n");
+}
+
 int ask_for_move(Board* board, char piece, char other_piece) {
+  show_message("\nEnter your move:\n");
   char input[3];
   int move;
   fgets(input, 3, stdin);

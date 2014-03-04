@@ -8,7 +8,7 @@
 #include "log.h"
 #include "player.h"
 
-void test_shows_draw() {
+void test_handles_draw() {
   Board* board = draw_board();
   Player* p1 = create_player('X', &fake_move);
   Player* p2 = create_player('O', &fake_move);
@@ -16,11 +16,10 @@ void test_shows_draw() {
   destroy_board(board);
   destroy_player(p1);
   destroy_player(p2);
-  char expected[] = "\e[1;1H\e[2J\nX O X \nO X O \nO X O \n\nDraw\n";
-  assert(strcmp(writer_log, expected) == 0);
+  assert(strstr(writer_log, "Draw"));
 }
 
-void test_shows_win() {
+void test_handles_win() {
   Board* board = draw_board();
   unset_move(board, 0);
   Player* p1 = create_player('O', &fake_move);
@@ -29,13 +28,10 @@ void test_shows_win() {
   destroy_board(board);
   destroy_player(p1);
   destroy_player(p2);
-  char expected[] = "\e[1;1H\e[2J"
-                    "\n- O X \nO X O \nO X O \n"
-                    "\nPlayer 1's turn\n"
-                    "\e[1;1H\e[2J"
-                    "\nO O X \nO X O \nO X O \n"
-                    "\nO wins!\n";
-  assert(strcmp(writer_log, expected) == 0);
+  assert(strstr(writer_log, "\n- O X \nO X O \nO X O \n"));
+  assert(strstr(writer_log, "Player 1's turn"));
+  assert(strstr(writer_log, "\nO O X \nO X O \nO X O \n"));
+  assert(strstr(writer_log, "O wins!"));
 }
 
 void test_gets_valid_move() {
@@ -48,16 +44,9 @@ void test_gets_valid_move() {
   destroy_player(p1);
   destroy_player(p2);
   current_move = 0;
-  char expected[] = "\e[1;1H\e[2J"
-                    "\nX - X \nO X O \nO X O \n"
-                    "\nPlayer 1's turn\n"
-                    "\e[1;1H\e[2J"
-                    "\nX - X \nO X O \nO X O \n"
-                    "\nPlayer 1's turn\n"
-                    "\e[1;1H\e[2J"
-                    "\nX X X \nO X O \nO X O \n"
-                    "\nX wins!\n";
-  assert(strcmp(writer_log, expected) == 0);
+  assert(strstr(writer_log, "Player 1's turn"));
+  assert(strstr(writer_log, "Invalid move"));
+  assert(strstr(writer_log, "X wins!"));
 }
 
 void test_switches_turns() {
@@ -71,26 +60,19 @@ void test_switches_turns() {
   destroy_player(p1);
   destroy_player(p2);
   current_move = 0;
-  char expected[] = "\e[1;1H\e[2J"
-                    "\n- - X \nO X O \nO X O \n"
-                    "\nPlayer 1's turn\n"
-                    "\e[1;1H\e[2J"
-                    "\nX - X \nO X O \nO X O \n"
-                    "\nPlayer 2's turn\n"
-                    "\e[1;1H\e[2J"
-                    "\nX O X \nO X O \nO X O \n"
-                    "\nDraw\n";
-  assert(strcmp(writer_log, expected) == 0);
+  assert(strstr(writer_log, "Player 1's turn"));
+  assert(strstr(writer_log, "Player 2's turn"));
+  assert(strstr(writer_log, "Draw"));
 }
 
 void game_test() {
   init_log();
 
-  test_shows_draw();
+  test_handles_draw();
   reset_log();
   success();
 
-  test_shows_win();
+  test_handles_win();
   reset_log();
   success();
 
