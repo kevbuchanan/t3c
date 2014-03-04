@@ -4,34 +4,34 @@
 #include "board.h"
 
 void clear_screen() {
-  write("\e[1;1H\e[2J");
+  write_out("\e[1;1H\e[2J");
 }
 
 void display_space(char space, int i) {
   if (space == EMPTY) {
-    writef("%c ", space);
+    write_outf("%c ", space);
   } else {
-    writef("%c ", space);
+    write_outf("%c ", space);
   }
 }
 
 void show_board(Board* board) {
   clear_screen();
-  write("\n");
+  write_out("\n");
   int size = get_size(board);
   int factor = get_factor(board);
   for(int i = 0; i < size; i++) {
     display_space(get_space(board, i), i);
-    if (i % factor == factor - 1) write("\n");
+    if (i % factor == factor - 1) write_out("\n");
   }
 }
 
 void show_message(char* message) {
-  write(message);
+  write_out(message);
 }
 
 void show_messagef(char* message, char sub) {
-  writef(message, sub);
+  write_outf(message, sub);
 }
 
 void show_winner(char winner) {
@@ -48,13 +48,15 @@ void show_turn(int turn) {
 
 void show_invalid_move(void) {
   show_message("\nInvalid move\n");
+  pause_writer(1);
 }
 
 int ask_for_move(Board* board, char piece, char other_piece) {
   show_message("\nEnter your move:\n");
   char input[3];
-  int move;
+  int move = -1;
   fgets(input, 3, stdin);
   sscanf(input, "%d", &move);
+  fpurge(stdin);
   return move - 1;
 }
