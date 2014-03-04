@@ -30,6 +30,12 @@ void test_display_message() {
   assert(strcmp(writer_log, message) == 0);
 }
 
+void test_display_formatted_message() {
+  char message[] = "Test with %c";
+  show_messagef(message, 'R');
+  assert(strcmp(writer_log, "Test with R") == 0);
+}
+
 void test_get_move() {
   freopen("fixtures/test_input.txt", "r", stdin);
   Board* board = new_board();
@@ -50,6 +56,10 @@ void presenter_test() {
   success();
 
   test_display_message();
+  reset_log();
+  success();
+
+  test_display_formatted_message();
   reset_log();
   success();
 

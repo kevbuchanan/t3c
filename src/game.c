@@ -29,6 +29,6 @@ void start_game(Board* board, Player* player1, Player* player2) {
   if (is_draw(board)) {
     show_message("\nDraw\n");
   } else {
-    show_message("\nWin\n");
+    show_messagef("\n%c wins!\n", winner(board));
   }
 }

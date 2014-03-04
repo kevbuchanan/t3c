@@ -32,7 +32,7 @@ void test_shows_win() {
   char expected[] = "\n- O X \nO X O \nO X O \n"
                     "\nPlayer 1's turn\n"
                     "\nO O X \nO X O \nO X O \n"
-                    "\nWin\n";
+                    "\nO wins!\n";
   assert(strcmp(writer_log, expected) == 0);
 }
 
@@ -51,7 +51,7 @@ void test_gets_valid_move() {
                     "\nX - X \nO X O \nO X O \n"
                     "\nPlayer 1's turn\n"
                     "\nX X X \nO X O \nO X O \n"
-                    "\nWin\n";
+                    "\nX wins!\n";
   assert(strcmp(writer_log, expected) == 0);
 }
 

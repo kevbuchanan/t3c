@@ -24,8 +24,9 @@ void write(char* string) {
   add_to_log(string);
 }
 
-void write_char(char* string, char sub) {
+void writef(char* string, char sub) {
   char output[20];
   sprintf(output, string, sub);
   add_to_log(output);
 }
+
