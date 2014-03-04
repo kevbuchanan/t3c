@@ -1,3 +1,4 @@
+#include "minimax.h"
 #include "board.h"
 
 int max_move(Board* board, char piece, char other_piece, int depth);

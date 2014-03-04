@@ -1,39 +1,48 @@
 #include <assert.h>
 #include <string.h>
+#include <stdio.h>
 
 #include "spec_helper.h"
 #include "board_test.h"
 #include "board.h"
 
 void test_new_board() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   for(int i = 0; i < 9; i++) {
     assert(get_space(board, i) == '-');
   }
   destroy_board(board);
 }
 
+void test_large_new_board() {
+  Board* board = new_board(7);
+  for(int i = 0; i < 49; i++) {
+    assert(get_space(board, i) == '-');
+  }
+  destroy_board(board);
+}
+
 void test_board_factor() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   assert(get_factor(board) == 3);
   destroy_board(board);
 }
 
 void test_change_board() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   make_move(board, 0, 'X');
   assert(get_space(board, 0) == 'X');
   destroy_board(board);
 }
 
 void test_board_not_full() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   assert(!is_full(board));
   destroy_board(board);
 }
 
 void test_board_is_full() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   for(int i = 0; i < 9; i++) {
     make_move(board, i, 'X');
   }
@@ -42,13 +51,13 @@ void test_board_is_full() {
 }
 
 void test_board_is_empty() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   assert(is_empty(board));
   destroy_board(board);
 }
 
 void test_board_is_won_row() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   assert(!is_won(board));
   make_move(board, 0, 'X');
   make_move(board, 1, 'X');
@@ -58,7 +67,7 @@ void test_board_is_won_row() {
 }
 
 void test_board_is_won_column() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   assert(!is_won(board));
   make_move(board, 0, 'X');
   make_move(board, 3, 'X');
@@ -68,7 +77,7 @@ void test_board_is_won_column() {
 }
 
 void test_board_is_won_diag1() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   assert(!is_won(board));
   make_move(board, 0, 'X');
   make_move(board, 4, 'X');
@@ -78,7 +87,7 @@ void test_board_is_won_diag1() {
 }
 
 void test_board_is_won_diag2() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   assert(!is_won(board));
   make_move(board, 2, 'X');
   make_move(board, 4, 'X');
@@ -88,7 +97,7 @@ void test_board_is_won_diag2() {
 }
 
 void test_board_finds_winner() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   make_move(board, 2, 'X');
   make_move(board, 1, 'O');
   make_move(board, 4, 'X');
@@ -99,7 +108,7 @@ void test_board_finds_winner() {
 }
 
 void test_board_is_done() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   make_move(board, 6, 'X');
   make_move(board, 7, 'X');
   make_move(board, 8, 'X');
@@ -114,14 +123,14 @@ void test_board_is_draw() {
 }
 
 void test_valid_move() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   bool check = is_valid_move(board, 0);
   assert(check);
   destroy_board(board);
 }
 
 void test_invalid_move() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   make_move(board, 0, 'X');
   bool check = is_valid_move(board, 0);
   assert(!check);
@@ -129,20 +138,22 @@ void test_invalid_move() {
 }
 
 void test_board_invalid_move_when_taken() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   make_move(board, 0, 'X');
   assert(make_move(board, 0, 'O') == -1);
   destroy_board(board);
 }
 
 void test_board_invalid_move_when_out_of_range() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   assert(make_move(board, 9, 'O') == -1);
   destroy_board(board);
 }
 
 void board_test() {
   test_new_board();
+  success();
+  test_large_new_board();
   success();
   test_board_factor();
   success();

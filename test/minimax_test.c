@@ -25,14 +25,14 @@ void play_all_games(Board* board, char first, char second, char ai) {
 }
 
 void test_empty_board() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   int move = next_move(board, 'X', 'O');
   assert(move == 4);
   destroy_board(board);
 }
 
 void test_take_win() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   make_move(board, 0, 'X');
   make_move(board, 3, 'O');
   make_move(board, 1, 'X');
@@ -43,7 +43,7 @@ void test_take_win() {
 }
 
 void test_take_draw() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   make_move(board, 0, 'X');
   make_move(board, 1, 'O');
   make_move(board, 2, 'X');
@@ -57,13 +57,13 @@ void test_take_draw() {
 }
 
 void test_never_loses_going_first() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   play_all_games(board, 'X', 'O', 'X');
   destroy_board(board);
 }
 
 void test_never_loses_going_second() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   play_all_games(board, 'X', 'O', 'O');
   destroy_board(board);
 }

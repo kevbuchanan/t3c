@@ -13,7 +13,7 @@ void test_player_piece() {
 
 void test_player_move() {
   Player* player = create_player('X', &fake_move);
-  Board* board = new_board();
+  Board* board = new_board(3);
   assert(player->get_move(board, 'X', 'O') == 0);
   destroy_board(board);
   destroy_player(player);

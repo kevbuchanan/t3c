@@ -1,23 +1,22 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include <stdio.h>
 
 #include "board.h"
 
-#define SIZE 9
-#define FACTOR 3
-
 struct _Board {
   char* spaces;
+  int factor;
 };
 
-Board* new_board() {
+Board* new_board(int factor) {
   Board* board = malloc(sizeof(Board));
-  board->spaces = malloc(SIZE * sizeof(char) + 1);
+  board->factor = factor;
+  int size = factor * factor;
+  board->spaces = malloc(size * sizeof(char) + 1);
 
-  char board_string[SIZE + 1] = "";
-  for(int i = 0; i < SIZE; i++) {
+  char board_string[100] = "";
+  for(int i = 0; i < size; i++) {
     board_string[i] = EMPTY;
   }
 
@@ -34,16 +33,17 @@ char get_space(Board* board, int space) {
   return board->spaces[space];
 }
 
-int get_size(Board* board) {
-  return SIZE;
+int get_factor(Board* board) {
+  return board->factor;
 }
 
-int get_factor(Board* board) {
-  return FACTOR;
+int get_size(Board* board) {
+  int factor = get_factor(board);
+  return factor * factor;
 }
 
 bool is_valid_move(Board* board, int space) {
-  return space < SIZE && board->spaces[space] == EMPTY;
+  return space < get_size(board) && board->spaces[space] == EMPTY;
 }
 
 int make_move(Board* board, int space, char piece) {
@@ -61,7 +61,7 @@ void unset_move(Board* board, int space) {
 
 int empty_count(Board* board) {
   int count = 0;
-  for(int i = 0; i < SIZE; i++) {
+  for(int i = 0; i < get_size(board); i++) {
     if (board->spaces[i] == EMPTY) {
       count += 1;
     }
@@ -76,20 +76,20 @@ bool is_full(Board* board) {
 
 bool is_empty(Board* board) {
   int empty_spaces = empty_count(board);
-  return empty_spaces == SIZE;
+  return empty_spaces == get_size(board);
 }
 
 char check_lines(Board* board, int rows) {
   int offset = 0;
   char space = EMPTY;
   int count = 0;
-  for(int i = 0; i < FACTOR; i++) {
-    for(int j = 0; j < FACTOR; j++) {
+  for(int i = 0; i < board->factor; i++) {
+    for(int j = 0; j < board->factor; j++) {
       char this;
       if (rows == 1) {
-        this = board->spaces[j + (FACTOR * offset)];
+        this = board->spaces[j + (board->factor * offset)];
       } else {
-        this = board->spaces[(j * FACTOR) + i];
+        this = board->spaces[(j * board->factor) + i];
       }
       if (this == space && this != EMPTY) {
         count++;
@@ -98,7 +98,7 @@ char check_lines(Board* board, int rows) {
         count = 1;
       }
     }
-    if (count == FACTOR) {
+    if (count == board->factor) {
       return space;
     } else {
       offset += 1;
@@ -119,11 +119,11 @@ char check_cols(Board* board) {
 char check_diag(Board* board, int direction) {
   char space = EMPTY;
   int count = 0;
-  int start = FACTOR - 1;
-  for(int i = 0; i < FACTOR; i++) {
+  int start = board->factor - 1;
+  for(int i = 0; i < board->factor; i++) {
     char this;
     if (direction == 1) {
-      this = board->spaces[i * (1 + FACTOR)];
+      this = board->spaces[i * (1 + board->factor)];
     } else {
       this = board->spaces[start + (i * start)];
     }
@@ -134,7 +134,7 @@ char check_diag(Board* board, int direction) {
       count = 1;
     }
   }
-  if (count == FACTOR) {
+  if (count == board->factor) {
     return space;
   }
   return EMPTY;

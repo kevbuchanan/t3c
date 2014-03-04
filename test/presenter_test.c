@@ -9,7 +9,7 @@
 #include "log.h"
 
 void test_display_empty_board() {
-  Board* board = new_board();
+  Board* board = new_board(3);
   char expected[] = "\n- - - \n- - - \n- - - \n";
   show_board(board);
   destroy_board(board);
@@ -46,7 +46,7 @@ void test_show_draw() {
 
 void test_get_move() {
   freopen("fixtures/test_input.txt", "r", stdin);
-  Board* board = new_board();
+  Board* board = new_board(3);
   int move = ask_for_move(board, 'X', 'O');
   destroy_board(board);
   assert(move == 5);

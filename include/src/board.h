@@ -7,7 +7,7 @@
 
 typedef struct _Board Board;
 
-Board* new_board();
+Board* new_board(int factor);
 int get_size(Board* board);
 int get_factor(Board* board);
 char get_space(Board* board, int space);

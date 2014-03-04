@@ -5,6 +5,7 @@
 #include "player_test.h"
 #include "presenter_test.h"
 #include "game_test.h"
+#include "config_test.h"
 
 void run_suite() {
   board_test();
@@ -12,6 +13,7 @@ void run_suite() {
   player_test();
   presenter_test();
   game_test();
+  config_test();
 }
 
 int main() {

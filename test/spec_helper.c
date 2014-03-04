@@ -30,7 +30,7 @@ int incrementing_move(Board* board, char piece, char other_piece) {
 }
 
 Board* draw_board(void) {
-  Board* board = new_board();
+  Board* board = new_board(3);
   make_move(board, 0, 'X');
   make_move(board, 1, 'O');
   make_move(board, 2, 'X');

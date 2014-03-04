@@ -4,7 +4,7 @@
 #include "board.h"
 
 Player* create_player(char piece, int (*move_fn) (Board* board, char piece, char other_piece)) {
-  Player* player = (Player*)malloc(sizeof(Player));
+  Player* player = malloc(sizeof(Player));
   player->piece = piece;
   player->get_move = move_fn;
   return player;

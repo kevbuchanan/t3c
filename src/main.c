@@ -3,9 +3,13 @@
 #include "player.h"
 #include "minimax.h"
 #include "presenter.h"
+#include "config.h"
+#include <stdio.h>
 
-int main() {
-  Board* board = new_board();
+int main(int argc, char* argv[]) {
+  Config config = initialize_config(argc, argv);
+
+  Board* board = new_board(3);
 
   Player* player1 = create_player('X', &ask_for_move);
   Player* player2 = create_player('O', &next_move);
