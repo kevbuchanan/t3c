@@ -10,7 +10,7 @@
 
 void test_display_empty_board() {
   Board* board = new_board();
-  char expected[] = "\n- - - \n- - - \n- - - \n";
+  char expected[] = "\e[1;1H\e[2J\n- - - \n- - - \n- - - \n";
   show_board(board);
   destroy_board(board);
   assert(strcmp(writer_log, expected) == 0);
@@ -18,22 +18,25 @@ void test_display_empty_board() {
 
 void test_display_played_board() {
   Board* board = draw_board();
-  char expected[] = "\nX O X \nO X O \nO X O \n";
+  char expected[] = "\e[1;1H\e[2J\nX O X \nO X O \nO X O \n";
   show_board(board);
   destroy_board(board);
   assert(strcmp(writer_log, expected) == 0);
 }
 
-void test_display_message() {
-  char message[] = "Testing the presenter";
-  show_message(message);
-  assert(strcmp(writer_log, message) == 0);
+void test_display_turn() {
+  show_turn(1);
+  assert(strcmp(writer_log, "\nPlayer 1's turn\n") == 0);
 }
 
-void test_display_formatted_message() {
-  char message[] = "Test with %c";
-  show_messagef(message, 'R');
-  assert(strcmp(writer_log, "Test with R") == 0);
+void test_show_winner() {
+  show_winner('X');
+  assert(strcmp(writer_log, "\nX wins!\n") == 0);
+}
+
+void test_show_draw() {
+  show_draw();
+  assert(strcmp(writer_log, "\nDraw\n") == 0);
 }
 
 void test_get_move() {
@@ -55,11 +58,15 @@ void presenter_test() {
   reset_log();
   success();
 
-  test_display_message();
+  test_display_turn();
   reset_log();
   success();
 
-  test_display_formatted_message();
+  test_show_winner();
+  reset_log();
+  success();
+
+  test_show_draw();
   reset_log();
   success();
 
