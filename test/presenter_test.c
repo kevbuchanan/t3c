@@ -6,7 +6,7 @@
 #include "presenter_test.h"
 #include "presenter.h"
 #include "board.h"
-#include "writer.h"
+#include "log.h"
 
 void test_display_empty_board() {
   Board* board = new_board();

@@ -5,7 +5,7 @@
 #include "game_test.h"
 #include "game.h"
 #include "board.h"
-#include "writer.h"
+#include "log.h"
 #include "player.h"
 
 void test_shows_draw() {
