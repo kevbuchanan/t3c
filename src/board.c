@@ -25,6 +25,11 @@ Board* new_board() {
   return board;
 }
 
+void destroy_board(Board* board) {
+  free(board->spaces);
+  free(board);
+}
+
 char get_space(Board* board, int space) {
   return board->spaces[space];
 }
@@ -35,11 +40,6 @@ int get_size(Board* board) {
 
 int get_factor(Board* board) {
   return FACTOR;
-}
-
-void destroy_board(Board* board) {
-  free(board->spaces);
-  free(board);
 }
 
 bool is_valid_move(Board* board, int space) {
@@ -166,19 +166,14 @@ char check_diag2(Board* board) {
 
 char winner(Board* board) {
   char piece;
-  if ((piece = check_rows(board)) != EMPTY) {
-    return piece;
-  }
-  if ((piece = check_cols(board)) != EMPTY) {
-    return piece;
-  }
-  if ((piece = check_diag1(board)) != EMPTY) {
-    return piece;
-  }
-  if ((piece = check_diag2(board)) != EMPTY) {
-    return piece;
-  }
-  return EMPTY;
+  piece = check_rows(board);
+  if (piece != EMPTY) return piece;
+  piece = check_cols(board);
+  if (piece != EMPTY) return piece;
+  piece = check_diag1(board);
+  if (piece != EMPTY) return piece;
+  piece = check_diag2(board);
+  return piece;
 }
 
 bool is_won(Board* board) {
