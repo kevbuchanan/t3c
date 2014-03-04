@@ -79,13 +79,18 @@ bool is_empty(Board* board) {
   return empty_spaces == SIZE;
 }
 
-char check_rows(Board* board) {
+char check_lines(Board* board, int rows) {
   int offset = 0;
   char space = EMPTY;
   int count = 0;
   for(int i = 0; i < FACTOR; i++) {
     for(int j = 0; j < FACTOR; j++) {
-      char this = board->spaces[j + (FACTOR * offset)];
+      char this;
+      if (rows == 1) {
+        this = board->spaces[j + (FACTOR * offset)];
+      } else {
+        this = board->spaces[(j * FACTOR) + i];
+      }
       if (this == space && this != EMPTY) {
         count++;
       } else {
@@ -103,65 +108,44 @@ char check_rows(Board* board) {
   return EMPTY;
 }
 
+char check_rows(Board* board) {
+  return check_lines(board, 1);
+}
+
 char check_cols(Board* board) {
-  int offset = 0;
+  return check_lines(board, 0);
+}
+
+char check_diag(Board* board, int direction) {
   char space = EMPTY;
   int count = 0;
+  int start = FACTOR - 1;
   for(int i = 0; i < FACTOR; i++) {
-    for(int j = 0; j < FACTOR; j++) {
-      char this = board->spaces[(j * FACTOR) + i];
-      if (this == space && this != EMPTY) {
-        count++;
-      } else {
-        space = this;
-        count = 1;
-      }
-    }
-    if (count == FACTOR) {
-      return space;
+    char this;
+    if (direction == 1) {
+      this = board->spaces[i * (1 + FACTOR)];
     } else {
-      offset += 1;
-      count = 0;
+      this = board->spaces[start + (i * start)];
     }
+    if (this == space && this != EMPTY) {
+      count++;
+    } else {
+      space = this;
+      count = 1;
+    }
+  }
+  if (count == FACTOR) {
+    return space;
   }
   return EMPTY;
 }
 
 char check_diag1(Board* board) {
-  char space = EMPTY;
-  int count = 0;
-  for(int i = 0; i < FACTOR; i++) {
-    char this = board->spaces[i * (1 + FACTOR)];
-    if (this == space && this != EMPTY) {
-      count++;
-    } else {
-      space = this;
-      count = 1;
-    }
-  }
-  if (count == FACTOR) {
-    return space;
-  }
-  return EMPTY;
+  return check_diag(board, 1);
 }
 
 char check_diag2(Board* board) {
-  char space = EMPTY;
-  int count = 0;
-  int start = FACTOR - 1;
-  for(int i = 0; i < FACTOR; i++) {
-    char this = board->spaces[start + (i * start)];
-    if (this == space && this != EMPTY) {
-      count++;
-    } else {
-      space = this;
-      count = 1;
-    }
-  }
-  if (count == FACTOR) {
-    return space;
-  }
-  return EMPTY;
+  return check_diag(board, 0);
 }
 
 char winner(Board* board) {
