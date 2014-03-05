@@ -1,3 +1,6 @@
+#include <stdlib.h>
+#include <time.h>
+
 #include "board.h"
 #include "game.h"
 #include "player.h"
@@ -5,6 +8,8 @@
 #include "config.h"
 
 int main(int argc, char* argv[]) {
+  srand(time(NULL));
+
   Config config = initialize_config(argc, argv);
 
   Board* board = new_board(config.size);

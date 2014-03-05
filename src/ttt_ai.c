@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <time.h>
 
 #include "ttt_ai.h"
 #include "board.h"
@@ -34,14 +35,17 @@ int max_move(Board* board, char piece, char other_piece, int depth, int max_dept
   int space;
   int max = -INFINITY;
 
+  int flip = (rand() % 2) * (get_size(board) - 1);
+
   for(int i = 0; i < get_size(board); i++) {
-    if (make_move(board, i, piece) != -1) {
+    int j = abs(i - flip);
+    if (make_move(board, j, piece) != -1) {
       int score = min_move(board, other_piece, piece, depth + 1, max_depth, max, beta);
       if (score > max) {
         max = score;
-        space = i;
+        space = j;
       }
-      unset_move(board, i);
+      unset_move(board, j);
       if (max >= beta) break;
     }
   }
