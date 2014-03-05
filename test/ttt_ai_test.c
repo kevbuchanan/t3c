@@ -56,6 +56,26 @@ void test_take_draw() {
   destroy_board(board);
 }
 
+void test_medium_move() {
+  Board* board = new_board(3);
+  make_move(board, 2, 'X');
+  make_move(board, 6, 'X');
+  make_move(board, 0, 'O');
+  int move = medium_move(board, 'O', 'X');
+  assert(move == 4);
+  destroy_board(board);
+}
+
+void test_easy_move() {
+  Board* board = new_board(3);
+  make_move(board, 3, 'X');
+  make_move(board, 5, 'X');
+  make_move(board, 6, 'O');
+  int move = easy_move(board, 'O', 'X');
+  assert(move < 9 && move >= 0);
+  destroy_board(board);
+}
+
 void test_never_loses_going_first() {
   Board* board = new_board(3);
   play_all_games(board, 'X', 'O', 'X');
@@ -74,6 +94,10 @@ void ttt_ai_test() {
   test_take_win();
   success();
   test_take_draw();
+  success();
+  test_medium_move();
+  success();
+  test_easy_move();
   success();
   test_never_loses_going_first();
   success();

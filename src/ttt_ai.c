@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 #include "ttt_ai.h"
 #include "board.h"
 
@@ -59,4 +61,13 @@ int hard_move(Board* board, char piece, char other_piece) {
   if (factor > 3) max_depth = MAX_DEPTH;
 
   return max_move(board, piece, other_piece, 0, max_depth, -INFINITY, INFINITY);
+}
+
+int medium_move(Board* board, char piece, char other_piece) {
+  return max_move(board, piece, other_piece, 0, 2, -INFINITY, INFINITY);
+}
+
+int easy_move(Board* board, char piece, char other_piece) {
+  int random_move = rand() % get_size(board);
+  return random_move;
 }
