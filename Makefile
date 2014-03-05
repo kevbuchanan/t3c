@@ -2,16 +2,16 @@ CFLAGS = -Wall
 
 all: spec main
 
-spec: bin/test.o bin/spec_helper.o bin/board.o bin/board_test.o bin/presenter.o bin/presenter_test.o bin/minimax.o bin/minimax_test.o \
+spec: bin/test.o bin/spec_helper.o bin/board.o bin/board_test.o bin/presenter.o bin/presenter_test.o bin/ttt_ai.o bin/ttt_ai_test.o \
 			bin/player.o bin/player_test.o bin/test_writer.o bin/reader.o bin/log.o bin/game.o bin/game_test.o bin/config.o bin/config_test.o \
 			bin/player_factory.o bin/player_factory_test.o
-	cc -o spec bin/test.o bin/spec_helper.o bin/board.o bin/board_test.o bin/presenter.o bin/presenter_test.o bin/minimax.o \
-				bin/minimax_test.o bin/player.o bin/player_test.o bin/test_writer.o bin/reader.o bin/log.o bin/game.o bin/game_test.o \
+	cc -o spec bin/test.o bin/spec_helper.o bin/board.o bin/board_test.o bin/presenter.o bin/presenter_test.o bin/ttt_ai.o \
+				bin/ttt_ai_test.o bin/player.o bin/player_test.o bin/test_writer.o bin/reader.o bin/log.o bin/game.o bin/game_test.o \
 				bin/config.o bin/config_test.o bin/player_factory.o bin/player_factory_test.o
 
-main: bin/main.o bin/board.o bin/presenter.o bin/minimax.o bin/player.o bin/writer.o bin/reader.o bin/game.o \
+main: bin/main.o bin/board.o bin/presenter.o bin/ttt_ai.o bin/player.o bin/writer.o bin/reader.o bin/game.o \
 			bin/config.o bin/player_factory.o
-	cc -o main bin/main.o bin/board.o bin/presenter.o bin/minimax.o bin/player.o bin/writer.o bin/reader.o bin/game.o \
+	cc -o main bin/main.o bin/board.o bin/presenter.o bin/ttt_ai.o bin/player.o bin/writer.o bin/reader.o bin/game.o \
 				bin/config.o bin/player_factory.o
 
 bin/test.o: test/test.c
@@ -35,11 +35,11 @@ bin/presenter.o: src/presenter.c
 bin/presenter_test.o: test/presenter_test.c
 	cc -I include/test -I include/src -c -o bin/presenter_test.o test/presenter_test.c
 
-bin/minimax.o: src/minimax.c
-	cc -I include/test -I include/src -c -o bin/minimax.o src/minimax.c
+bin/ttt_ai.o: src/ttt_ai.c
+	cc -I include/test -I include/src -c -o bin/ttt_ai.o src/ttt_ai.c
 
-bin/minimax_test.o: test/minimax_test.c
-	cc -I include/test -I include/src -c -o bin/minimax_test.o test/minimax_test.c
+bin/ttt_ai_test.o: test/ttt_ai_test.c
+	cc -I include/test -I include/src -c -o bin/ttt_ai_test.o test/ttt_ai_test.c
 
 bin/player.o: src/player.c
 	cc -I include/test -I include/src -c -o bin/player.o src/player.c

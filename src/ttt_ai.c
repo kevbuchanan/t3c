@@ -1,4 +1,4 @@
-#include "minimax.h"
+#include "ttt_ai.h"
 #include "board.h"
 
 #define INFINITY 100
@@ -51,7 +51,7 @@ int max_move(Board* board, char piece, char other_piece, int depth, int max_dept
   }
 }
 
-int next_move(Board* board, char piece, char other_piece) {
+int hard_move(Board* board, char piece, char other_piece) {
   int factor = get_factor(board);
   if (is_empty(board)) return factor + 1;
 

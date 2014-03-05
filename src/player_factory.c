@@ -1,14 +1,14 @@
 #include "player_factory.h"
 #include "player.h"
 #include "presenter.h"
-#include "minimax.h"
+#include "ttt_ai.h"
 
 MoveHandler human_strategy() {
   return &ask_for_move;
 }
 
 MoveHandler computer_strategy() {
-  return &next_move;
+  return &hard_move;
 }
 
 Player* build_player(char piece, PlayerType type) {

@@ -4,18 +4,20 @@
 #include "player_factory_test.h"
 #include "player_factory.h"
 #include "presenter.h"
-#include "minimax.h"
+#include "ttt_ai.h"
 
 void test_build_human_player() {
   Player* player = build_player('Z', human);
   assert(player->piece == 'Z');
   assert(player->get_move == &ask_for_move);
+  destroy_player(player);
 }
 
 void test_build_computer_player() {
   Player* player = build_player('X', computer);
   assert(player->piece == 'X');
-  assert(player->get_move == &next_move);
+  assert(player->get_move == &hard_move);
+  destroy_player(player);
 }
 
 void player_factory_test() {
