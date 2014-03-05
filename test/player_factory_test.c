@@ -13,16 +13,34 @@ void test_build_human_player() {
   destroy_player(player);
 }
 
-void test_build_computer_player() {
-  Player* player = build_player('X', computer);
+void test_build_difficult_player() {
+  Player* player = build_player('X', difficult);
   assert(player->piece == 'X');
   assert(player->get_move == &hard_move);
+  destroy_player(player);
+}
+
+void test_build_medium_player() {
+  Player* player = build_player('U', medium);
+  assert(player->piece == 'U');
+  assert(player->get_move == &medium_move);
+  destroy_player(player);
+}
+
+void test_build_easy_player() {
+  Player* player = build_player('W', easy);
+  assert(player->piece == 'W');
+  assert(player->get_move == &easy_move);
   destroy_player(player);
 }
 
 void player_factory_test() {
   test_build_human_player();
   success();
-  test_build_computer_player();
+  test_build_difficult_player();
+  success();
+  test_build_medium_player();
+  success();
+  test_build_easy_player();
   success();
 }

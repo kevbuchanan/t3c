@@ -1,45 +1,45 @@
 #include <string.h>
+#include <stdio.h>
 
 #include "config.h"
 
 #define SIZE_FLAG "-s"
 #define DEFAULT_SIZE 3
-#define ORDER_FLAG "-o"
-#define DEFAULT_ORDER 1
+#define MAX_SIZE 9
+
 #define DIFF_FLAG "-d"
 #define DEFAULT_DIFF 2
+#define MAX_DIFF 3
 
 int find_flag(int argc, char* argv[], char* flag) {
-  int i = -1;
   for(int j = 0; j < argc; j++) {
     if (strcmp(flag, argv[j]) == 0) return j;
   }
-  return i;
+  return -1;
 }
 
 int make_int(char* input) {
   return (int)input[0] - '0';
 }
 
-int parse_arg(int argc, char* argv[], char* flag, int fdefault) {
+int parse_arg(int argc, char* argv[], char* flag, int fdefault, int max) {
   int i = find_flag(argc, argv, flag);
-  if(i != -1) {
-    return make_int(argv[i + 1]);
-  } else {
-    return fdefault;
+  char* arg = argv[i + 1];
+  if (arg != NULL) {
+    int iarg = make_int(arg);
+    if(i != -1 && iarg <= max) {
+      return iarg;
+    }
   }
+  return fdefault;
 }
 
 int parse_difficulty(int argc, char* argv[]) {
-  return parse_arg(argc, argv, DIFF_FLAG, DEFAULT_DIFF);
-}
-
-int parse_order(int argc, char* argv[]) {
-  return parse_arg(argc, argv, ORDER_FLAG, DEFAULT_ORDER);
+  return parse_arg(argc, argv, DIFF_FLAG, DEFAULT_DIFF, MAX_DIFF);
 }
 
 int parse_size(int argc, char* argv[]) {
-  return parse_arg(argc, argv, SIZE_FLAG, DEFAULT_SIZE);
+  return parse_arg(argc, argv, SIZE_FLAG, DEFAULT_SIZE, MAX_SIZE);
 }
 
 Config initialize_config(int argc, char* argv[]) {
@@ -49,6 +49,6 @@ Config initialize_config(int argc, char* argv[]) {
   config.p1_piece = 'X';
   config.p1_type = human;
   config.p2_piece = 'O';
-  config.p2_type = computer;
+  config.p2_type = medium;
   return config;
 }

@@ -34,13 +34,19 @@ void test_p2_piece() {
 
 void test_p2_type() {
   Config config = initialize_config(6, test_argv);
-  assert(config.p2_type == computer);
+  assert(config.p2_type == medium);
 }
 
 void test_defaults() {
   char* argv[] = {};
   Config config = initialize_config(0, argv);
   assert(config.difficulty == 2);
+  assert(config.size == 3);
+}
+
+void test_checks_max() {
+  char* argv[] = {"-s", "12"};
+  Config config = initialize_config(0, argv);
   assert(config.size == 3);
 }
 
@@ -58,5 +64,7 @@ void config_test() {
   test_p2_type();
   success();
   test_defaults();
+  success();
+  test_checks_max();
   success();
 }
