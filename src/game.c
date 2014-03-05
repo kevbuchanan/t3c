@@ -1,7 +1,5 @@
 #include "game.h"
-#include "board.h"
 #include "presenter.h"
-#include "player.h"
 
 int do_turn(int turn, Board* board, Player* player, Player* other_player) {
   show_board(board);

@@ -1,7 +1,6 @@
 #include <stdlib.h>
 
 #include "player.h"
-#include "board.h"
 
 Player* create_player(char piece, MoveHandler move_fn) {
   Player* player = malloc(sizeof(Player));

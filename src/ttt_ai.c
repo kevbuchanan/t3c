@@ -2,7 +2,6 @@
 #include <time.h>
 
 #include "ttt_ai.h"
-#include "board.h"
 
 #define INFINITY 100
 #define SCORE 50

@@ -1,7 +1,6 @@
 #include "presenter.h"
 #include "writer.h"
 #include "reader.h"
-#include "board.h"
 
 void clear_screen() {
   write_out("\e[1;1H\e[2J");
