@@ -10,7 +10,7 @@
 
 void test_display_empty_board() {
   Board* board = new_board(3);
-  char expected[] = "\n- - - \n- - - \n- - - \n";
+  char expected[] = "\n1 2 3 \n4 5 6 \n7 8 9 \n";
   show_board(board);
   destroy_board(board);
   assert(strstr(writer_log, expected));
