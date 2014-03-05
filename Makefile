@@ -3,12 +3,16 @@ CFLAGS = -Wall
 all: spec main
 
 spec: bin/test.o bin/spec_helper.o bin/board.o bin/board_test.o bin/presenter.o bin/presenter_test.o bin/minimax.o bin/minimax_test.o \
-			bin/player.o bin/player_test.o bin/test_writer.o bin/reader.o bin/log.o bin/game.o bin/game_test.o bin/config.o bin/config_test.o
+			bin/player.o bin/player_test.o bin/test_writer.o bin/reader.o bin/log.o bin/game.o bin/game_test.o bin/config.o bin/config_test.o \
+			bin/player_factory.o bin/player_factory_test.o
 	cc -o spec bin/test.o bin/spec_helper.o bin/board.o bin/board_test.o bin/presenter.o bin/presenter_test.o bin/minimax.o \
-				bin/minimax_test.o bin/player.o bin/player_test.o bin/test_writer.o bin/reader.o bin/log.o bin/game.o bin/game_test.o bin/config.o bin/config_test.o
+				bin/minimax_test.o bin/player.o bin/player_test.o bin/test_writer.o bin/reader.o bin/log.o bin/game.o bin/game_test.o \
+				bin/config.o bin/config_test.o bin/player_factory.o bin/player_factory_test.o
 
-main: bin/main.o bin/board.o bin/presenter.o bin/minimax.o bin/player.o bin/writer.o bin/reader.o bin/game.o bin/config.o
-	cc -o main bin/main.o bin/board.o bin/presenter.o bin/minimax.o bin/player.o bin/writer.o bin/reader.o bin/game.o bin/config.o
+main: bin/main.o bin/board.o bin/presenter.o bin/minimax.o bin/player.o bin/writer.o bin/reader.o bin/game.o \
+			bin/config.o bin/player_factory.o
+	cc -o main bin/main.o bin/board.o bin/presenter.o bin/minimax.o bin/player.o bin/writer.o bin/reader.o bin/game.o \
+				bin/config.o bin/player_factory.o
 
 bin/test.o: test/test.c
 	cc -I include/test -I include/src -c -o bin/test.o test/test.c
@@ -66,6 +70,12 @@ bin/game.o: src/game.c
 
 bin/game_test.o: test/game_test.c
 	cc -I include/test -I include/src -c -o bin/game_test.o test/game_test.c
+
+bin/player_factory.o: src/player_factory.c
+	cc -I include/test -I include/src -c -o bin/player_factory.o src/player_factory.c
+
+bin/player_factory_test.o: test/player_factory_test.c
+	cc -I include/test -I include/src -c -o bin/player_factory_test.o test/player_factory_test.c
 
 clean:
 	rm -f bin/*

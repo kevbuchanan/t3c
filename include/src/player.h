@@ -3,12 +3,14 @@
 
 #include "board.h"
 
+typedef int (*MoveHandler)(Board* board, char piece, char other_piece);
+
 typedef struct Player {
   char piece;
-  int (*get_move) (Board* board, char piece, char other_piece);
+  MoveHandler get_move;
 } Player;
 
-Player* create_player(char piece, int (*move_fn) (Board* board, char piece, char other_piece));
+Player* create_player(char piece, MoveHandler move_fn);
 void destroy_player(Player* player);
 
 #endif
