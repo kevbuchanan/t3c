@@ -1,7 +1,6 @@
-#include <stdio.h>
-
 #include "presenter.h"
 #include "writer.h"
+#include "reader.h"
 #include "board.h"
 
 void clear_screen() {
@@ -54,10 +53,5 @@ void show_invalid_move(void) {
 
 int ask_for_move(Board* board, char piece, char other_piece) {
   show_message("\nEnter your move:\n");
-  char input[3];
-  int move = -1;
-  fgets(input, 3, stdin);
-  sscanf(input, "%d", &move);
-  fpurge(stdin);
-  return move - 1;
+  return read_int();
 }

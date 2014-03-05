@@ -2,11 +2,13 @@ CFLAGS = -Wall
 
 all: spec main
 
-spec: bin/test.o bin/spec_helper.o bin/board.o bin/board_test.o bin/presenter.o bin/presenter_test.o bin/minimax.o bin/minimax_test.o bin/player.o bin/player_test.o bin/test_writer.o bin/log.o bin/game.o bin/game_test.o bin/config.o bin/config_test.o
-	cc -o spec bin/test.o bin/spec_helper.o bin/board.o bin/board_test.o bin/presenter.o bin/presenter_test.o bin/minimax.o bin/minimax_test.o bin/player.o bin/player_test.o bin/test_writer.o bin/log.o bin/game.o bin/game_test.o bin/config.o bin/config_test.o
+spec: bin/test.o bin/spec_helper.o bin/board.o bin/board_test.o bin/presenter.o bin/presenter_test.o bin/minimax.o bin/minimax_test.o \
+			bin/player.o bin/player_test.o bin/test_writer.o bin/reader.o bin/log.o bin/game.o bin/game_test.o bin/config.o bin/config_test.o
+	cc -o spec bin/test.o bin/spec_helper.o bin/board.o bin/board_test.o bin/presenter.o bin/presenter_test.o bin/minimax.o \
+				bin/minimax_test.o bin/player.o bin/player_test.o bin/test_writer.o bin/reader.o bin/log.o bin/game.o bin/game_test.o bin/config.o bin/config_test.o
 
-main: bin/main.o bin/board.o bin/presenter.o bin/minimax.o bin/player.o bin/writer.o bin/game.o bin/config.o
-	cc -o main bin/main.o bin/board.o bin/presenter.o bin/minimax.o bin/player.o bin/writer.o bin/game.o bin/config.o
+main: bin/main.o bin/board.o bin/presenter.o bin/minimax.o bin/player.o bin/writer.o bin/reader.o bin/game.o bin/config.o
+	cc -o main bin/main.o bin/board.o bin/presenter.o bin/minimax.o bin/player.o bin/writer.o bin/reader.o bin/game.o bin/config.o
 
 bin/test.o: test/test.c
 	cc -I include/test -I include/src -c -o bin/test.o test/test.c
@@ -43,6 +45,9 @@ bin/player_test.o: test/player_test.c
 
 bin/writer.o: src/writer.c
 	cc -I include/test -I include/src -c -o bin/writer.o src/writer.c
+
+bin/reader.o: src/reader.c
+	cc -I include/test -I include/src -c -o bin/reader.o src/reader.c
 
 bin/test_writer.o: test/test_writer.c
 	cc -I include/test -I include/src -c -o bin/test_writer.o test/test_writer.c
