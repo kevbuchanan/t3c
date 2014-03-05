@@ -61,7 +61,7 @@ int hard_move(Board* board, char piece, char other_piece) {
   int factor = get_factor(board);
   if (is_empty(board)) return factor + 1;
 
-  int max_depth;
+  int max_depth = 10;
   if (factor > 3) max_depth = MAX_DEPTH;
 
   return max_move(board, piece, other_piece, 0, max_depth, -INFINITY, INFINITY);

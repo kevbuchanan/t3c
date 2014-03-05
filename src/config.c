@@ -24,9 +24,8 @@ int make_int(char* input) {
 
 int parse_arg(int argc, char* argv[], char* flag, int fdefault, int max) {
   int i = find_flag(argc, argv, flag);
-  char* arg = argv[i + 1];
-  if (arg != NULL) {
-    int iarg = make_int(arg);
+  if (argc - 1 >= i + 1) {
+    int iarg = make_int(argv[i + 1]);
     if(i != -1 && iarg <= max) {
       return iarg;
     }
