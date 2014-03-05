@@ -45,7 +45,10 @@ int parse_size(int argc, char* argv[]) {
 Config initialize_config(int argc, char* argv[]) {
   Config config;
   config.size = parse_size(argc, argv);
-  config.order = parse_order(argc, argv);
   config.difficulty = parse_difficulty(argc, argv);
+  config.p1_piece = 'X';
+  config.p1_type = human;
+  config.p2_piece = 'O';
+  config.p2_type = computer;
   return config;
 }
