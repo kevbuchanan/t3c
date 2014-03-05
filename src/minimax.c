@@ -1,13 +1,17 @@
 #include "minimax.h"
 #include "board.h"
 
+#define INFINITY 100
+#define SCORE 50
+#define MAX_DEPTH 4
+
 int max_move(Board* board, char piece, char other_piece, int depth, int max_depth, int alpha, int beta);
 
 int min_move(Board* board, char piece, char other_piece, int depth, int max_depth, int alpha, int beta) {
-  if (winner(board) == other_piece) return 50 - depth;
+  if (winner(board) == other_piece) return SCORE - depth;
   if (is_draw(board) || depth == max_depth) return 0;
 
-  int min = 100;
+  int min = INFINITY;
 
   for(int i = 0; i < get_size(board); i++) {
     if (make_move(board, i, piece) != -1) {
@@ -22,11 +26,11 @@ int min_move(Board* board, char piece, char other_piece, int depth, int max_dept
 }
 
 int max_move(Board* board, char piece, char other_piece, int depth, int max_depth, int alpha, int beta) {
-  if (winner(board) == other_piece) return -(50 - depth);
+  if (winner(board) == other_piece) return -SCORE + depth;
   if (is_draw(board) || depth == max_depth) return 0;
 
   int space;
-  int max = -100;
+  int max = -INFINITY;
 
   for(int i = 0; i < get_size(board); i++) {
     if (make_move(board, i, piece) != -1) {
@@ -50,7 +54,9 @@ int max_move(Board* board, char piece, char other_piece, int depth, int max_dept
 int next_move(Board* board, char piece, char other_piece) {
   int factor = get_factor(board);
   if (is_empty(board)) return factor + 1;
-  int max_depth = 6;
-  if (factor > 3) max_depth = 3;
-  return max_move(board, piece, other_piece, 0, max_depth, -100, 100);
+
+  int max_depth;
+  if (factor > 3) max_depth = MAX_DEPTH;
+
+  return max_move(board, piece, other_piece, 0, max_depth, -INFINITY, INFINITY);
 }
