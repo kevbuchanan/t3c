@@ -12,10 +12,10 @@ struct _Board {
 Board* new_board(int factor) {
   Board* board = malloc(sizeof(Board));
   board->factor = factor;
-  int size = factor * factor;
-  board->spaces = malloc(size * sizeof(char) + 1);
+  board->spaces = malloc(100);
 
   char board_string[100] = "";
+  int size = factor * factor;
   for(int i = 0; i < size; i++) {
     board_string[i] = EMPTY;
   }

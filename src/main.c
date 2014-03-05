@@ -9,7 +9,7 @@
 int main(int argc, char* argv[]) {
   Config config = initialize_config(argc, argv);
 
-  Board* board = new_board(3);
+  Board* board = new_board(4);
 
   Player* player1 = create_player('X', &ask_for_move);
   Player* player2 = create_player('O', &next_move);

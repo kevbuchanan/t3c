@@ -5,7 +5,7 @@
 
 void success(void);
 void show_results(void);
-int current_move;
+extern int current_move;
 int fake_move(Board* board, char piece, char other_piece);
 int incrementing_move(Board* board, char piece, char other_piece);
 Board* draw_board(void);

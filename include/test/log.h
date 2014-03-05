@@ -1,7 +1,7 @@
 #ifndef LOG_H
 #define LOG_H
 
-char* writer_log;
+extern char* writer_log;
 
 void init_log(void);
 void add_to_log(char* string);

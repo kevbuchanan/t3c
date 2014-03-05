@@ -4,13 +4,13 @@
 #include "minimax_test.h"
 #include "minimax.h"
 #include "board.h"
+#include <stdio.h>
 
 void play_all_games(Board* board, char first, char second, char ai) {
-  if (winner(board) == ai || is_draw(board)) return;
+  if (is_done(board)) return;
   if (first == ai) {
     int move = next_move(board, first, second);
     make_move(board, move, first);
-    assert(winner(board) == EMPTY || winner(board) == ai);
     play_all_games(board, second, first, ai);
     unset_move(board, move);
   } else {
