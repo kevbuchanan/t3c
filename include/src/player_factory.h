@@ -4,7 +4,7 @@
 #include "player.h"
 
 typedef enum {
-  difficult,
+  hard,
   medium,
   easy,
   human

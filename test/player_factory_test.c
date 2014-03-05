@@ -14,7 +14,7 @@ void test_build_human_player() {
 }
 
 void test_build_difficult_player() {
-  Player* player = build_player('X', difficult);
+  Player* player = build_player('X', hard);
   assert(player->piece == 'X');
   assert(player->get_move == &hard_move);
   destroy_player(player);

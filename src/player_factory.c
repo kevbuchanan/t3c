@@ -7,7 +7,7 @@ MoveHandler human_strategy() {
   return &ask_for_move;
 }
 
-MoveHandler difficult_strategy() {
+MoveHandler hard_strategy() {
   return &hard_move;
 }
 
@@ -25,8 +25,8 @@ Player* build_player(char piece, PlayerType type) {
     case human :
       player = create_player(piece, human_strategy());
       break;
-    case difficult :
-      player = create_player(piece, difficult_strategy());
+    case hard :
+      player = create_player(piece, hard_strategy());
       break;
     case medium :
       player = create_player(piece, medium_strategy());

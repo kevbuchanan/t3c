@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #include "config.h"
 
@@ -7,9 +8,8 @@
 #define DEFAULT_SIZE 3
 #define MAX_SIZE 9
 
-#define DIFF_FLAG "-d"
-#define DEFAULT_DIFF 2
-#define MAX_DIFF 3
+#define P1_FLAG "-p1"
+#define P2_FLAG "-p2"
 
 int find_flag(int argc, char* argv[], char* flag) {
   for(int j = 0; j < argc; j++) {
@@ -33,21 +33,32 @@ int parse_arg(int argc, char* argv[], char* flag, int fdefault, int max) {
   return fdefault;
 }
 
-int parse_difficulty(int argc, char* argv[]) {
-  return parse_arg(argc, argv, DIFF_FLAG, DEFAULT_DIFF, MAX_DIFF);
-}
-
 int parse_size(int argc, char* argv[]) {
   return parse_arg(argc, argv, SIZE_FLAG, DEFAULT_SIZE, MAX_SIZE);
+}
+
+bool is_match(char* arg, char* type) {
+  return strcmp(arg, type) == 0;
+}
+
+PlayerType parse_player_type(int argc, char* argv[], char* flag, PlayerType fdefault) {
+  int i = find_flag(argc, argv, flag);
+  if (argc - 1 >= i + 1) {
+    char* arg = argv[i + 1];
+    if (is_match(arg, "human")) return human;
+    if (is_match(arg, "hard")) return hard;
+    if (is_match(arg, "medium")) return medium;
+    if (is_match(arg, "easy")) return easy;
+  }
+  return fdefault;
 }
 
 Config initialize_config(int argc, char* argv[]) {
   Config config;
   config.size = parse_size(argc, argv);
-  config.difficulty = parse_difficulty(argc, argv);
   config.p1_piece = 'X';
-  config.p1_type = human;
+  config.p1_type = parse_player_type(argc, argv, P1_FLAG, human);
   config.p2_piece = 'O';
-  config.p2_type = medium;
+  config.p2_type = parse_player_type(argc, argv, P2_FLAG, medium);
   return config;
 }
