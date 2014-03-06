@@ -28,9 +28,9 @@ void test_handles_win() {
   destroy_board(board);
   destroy_player(p1);
   destroy_player(p2);
-  assert(strstr(writer_log, "\n1 O X \nO X O \nO X O \n"));
+  assert(strstr(writer_log, "1 O X O X O O X O"));
   assert(strstr(writer_log, "Player 1's turn"));
-  assert(strstr(writer_log, "\nO O X \nO X O \nO X O \n"));
+  assert(strstr(writer_log, "O O X O X O O X O"));
   assert(strstr(writer_log, "O wins!"));
 }
 

@@ -10,7 +10,7 @@
 
 void test_display_empty_board() {
   Board* board = new_board(3);
-  char expected[] = "\n1 2 3 \n4 5 6 \n7 8 9 \n";
+  char expected[] = "1 2 3 4 5 6 7 8 9 ";
   show_board(board);
   destroy_board(board);
   assert(strstr(writer_log, expected));
@@ -18,7 +18,7 @@ void test_display_empty_board() {
 
 void test_display_played_board() {
   Board* board = draw_board();
-  char expected[] = "\nX O X \nO X O \nO X O \n";
+  char expected[] = "X O X O X O O X O ";
   show_board(board);
   destroy_board(board);
   assert(strstr(writer_log, expected));

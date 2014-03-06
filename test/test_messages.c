@@ -14,6 +14,14 @@ char* empty_space_message = "%d ";
 
 char* taken_space_message = "%c ";
 
-char* end_row_message = "\n";
+char* reset_screen_message = "";
 
-char* reset_screen_message = "\e[1;1H\e[2J\n";
+char* end_board_message = "";
+
+char* cell_transition_message = "";
+
+char* row_transition_start = "";
+
+char* row_transition_piece = "";
+
+char* row_transition_end = "";
