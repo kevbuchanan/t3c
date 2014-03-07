@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 #include "presenter.h"
 #include "messages.h"
 #include "writer.h"
@@ -23,16 +25,26 @@ void display_row_transition(int factor) {
   write_out(row_transition_end);
 }
 
+bool is_row_transition(int i, int factor, int size) {
+  int last_on_board = size - 1;
+  int last_in_row = factor - 1;
+  return i % factor == last_in_row && i != last_on_board;
+}
+
+bool is_cell_transition(int i, int factor) {
+  return i % factor < factor - 1;
+}
+
 void show_board(Board* board) {
   reset_screen();
   int size = get_size(board);
   int factor = get_factor(board);
   for(int i = 0; i < size; i++) {
     display_space(get_space(board, i), i);
-    if (i % factor == factor - 1 && i != size - 1) {
+    if (is_row_transition(i, factor, size)) {
       display_row_transition(factor);
     }
-    if (i % factor < factor - 1) {
+    if (is_cell_transition(i, factor)) {
       write_out(cell_transition_message);
     }
   }
