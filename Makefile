@@ -2,7 +2,7 @@ CFLAGS = -Wall
 INCLUDE = -I include/test -I include/src -c
 CORE = src/board.c src/presenter.c src/ttt_ai.c src/player.c src/reader.c src/game.c src/config.c src/player_factory.c
 MOCKED = src/writer.c src/messages.c src/main.c
-TESTS = $(wildcard test/*.c)
+TESTS = $(wildcard test/*.c) $(wildcard test/mock/*.c)
 TEST_OBJECTS = $(TESTS:.c=.o)
 MAIN_OBJECTS = $(CORE:.c=.o)
 MOCKED_OBJECTS = $(MOCKED:.c=.o)
@@ -19,6 +19,7 @@ main: $(MAIN_OBJECTS) $(MOCKED_OBJECTS)
 	cc $(INCLUDE) -o bin/$@ $<
 
 clean:
-	rm -f bin/src/*
-	rm -f bin/test/*
+	rm -f bin/src/*.o
+	rm -f bin/test/*.o
+	rm -f bin/test/mock/*.o
 
