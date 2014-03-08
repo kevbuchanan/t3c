@@ -7,6 +7,15 @@
 #define SCORE 50
 #define MAX_DEPTH 4
 
+int space_for(int i, int starting_point, int size) {
+  int n = i - starting_point;
+  if (n < 0) {
+    return n + size;
+  } else {
+    return n;
+  }
+}
+
 int max_move(Board* board, char piece, char other_piece, int depth, int max_depth, int alpha, int beta);
 
 int min_move(Board* board, char piece, char other_piece, int depth, int max_depth, int alpha, int beta) {
@@ -34,10 +43,11 @@ int max_move(Board* board, char piece, char other_piece, int depth, int max_dept
   int space;
   int max = -INFINITY;
 
-  int flip = (rand() % 2) * (get_size(board) - 1);
+  int size = get_size(board);
+  int rand_start = rand() % size;
 
-  for(int i = 0; i < get_size(board); i++) {
-    int j = abs(i - flip);
+  for(int i = 0; i < size; i++) {
+    int j = space_for(i, rand_start, size);
     if (make_move(board, j, piece) != -1) {
       int score = min_move(board, other_piece, piece, depth + 1, max_depth, max, beta);
       if (score > max) {
