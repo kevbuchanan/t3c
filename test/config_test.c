@@ -29,7 +29,7 @@ void test_p2_default_piece() {
 
 void test_p2_default_type() {
   Config config = initialize_config(0, empty_argv);
-  assert(config.p2_type == medium);
+  assert(config.p2_type == hard);
 }
 
 void test_default_size() {
