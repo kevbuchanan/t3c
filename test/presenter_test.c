@@ -45,7 +45,7 @@ void test_show_draw() {
 }
 
 void test_get_move() {
-  freopen("fixtures/test_input.txt", "r", stdin);
+  freopen("test/fixtures/test_input.txt", "r", stdin);
   Board* board = new_board(3);
   int move = ask_for_move(board, 'X', 'O');
   destroy_board(board);
