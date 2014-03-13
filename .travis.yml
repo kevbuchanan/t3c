@@ -1,0 +1,5 @@
+lannguage: c
+compiler:
+  - gcc
+  - clang
+script: make && ./spec
