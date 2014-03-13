@@ -1,4 +1,4 @@
-# Tic Tac Toe in C
+# Tic Tac Toe in C [![Build Status](https://travis-ci.org/kevinbuch/t3c.png?branch=master)](https://travis-ci.org/kevinbuch/t3c)
 
 ##Make
 
