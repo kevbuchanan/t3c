@@ -2,4 +2,4 @@ lannguage: c
 compiler:
   - gcc
   - clang
-script: ./configure && make && ./spec
+script: make && ./spec
