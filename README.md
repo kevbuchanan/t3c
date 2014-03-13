@@ -18,7 +18,7 @@ $ ./spec
 $ ./main
 ```
 
-Default is human(X) vs medium difficulty(O) on 3x3 board
+Default is human(X) vs hard difficulty(O) on 3x3 board
 
 ### Options
 Size: ```-s <size 1 to 9>```
@@ -32,6 +32,14 @@ Example:
 ```bash
 $ ./main -s 6 -p1 easy -p2 human
 ```
+
+### Difficulties
+
+Easy: Makes random moves
+
+Medium: Will win if possible, but is beatable
+
+Hard: Unbeatable on 3x3 board
 
 ## Debug Memory Leaks
 

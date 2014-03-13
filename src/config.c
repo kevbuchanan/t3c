@@ -58,6 +58,6 @@ Config initialize_config(int argc, char* argv[]) {
   config.p1_piece = 'X';
   config.p1_type = parse_player_type(argc, argv, P1_FLAG, human);
   config.p2_piece = 'O';
-  config.p2_type = parse_player_type(argc, argv, P2_FLAG, medium);
+  config.p2_type = parse_player_type(argc, argv, P2_FLAG, hard);
   return config;
 }
