@@ -4,22 +4,25 @@ CFLAGS = -Wall -std=c99
 
 INCLUDE = -I include/test -I include/src -c
 
-OUT = bin/src \
-			bin/test \
-			bin/test/mock
+OUT = \
+	bin/src \
+	bin/test \
+	bin/test/mock
 
-CORE = src/board.c \
-			 src/presenter.c \
-			 src/ttt_ai.c \
-			 src/player.c \
-			 src/reader.c \
-			 src/game.c \
-			 src/config.c \
-			 src/player_factory.c
+CORE = \
+	src/board.c \
+	src/presenter.c \
+	src/ttt_ai.c \
+	src/player.c \
+	src/reader.c \
+	src/game.c \
+	src/config.c \
+	src/player_factory.c
 
-MOCKED = src/writer.c \
-				 src/messages.c \
-				 src/main.c
+MOCKED = \
+	src/writer.c \
+	src/messages.c \
+	src/main.c
 
 TESTS = $(wildcard test/*.c) $(wildcard test/mock/*.c)
 
