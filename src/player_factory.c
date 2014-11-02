@@ -2,37 +2,24 @@
 #include "presenter.h"
 #include "ttt_ai.h"
 
-MoveHandler human_strategy() {
-  return &ask_for_move;
-}
-
-MoveHandler hard_strategy() {
-  return &hard_move;
-}
-
-MoveHandler medium_strategy() {
-  return &medium_move;
-}
-
-MoveHandler easy_strategy() {
-  return &easy_move;
+MoveHandler get_handler(PlayerType type) {
+  switch (type) {
+    case human :
+      return &ask_for_move;
+      break;
+    case hard :
+      return &hard_move;
+      break;
+    case medium :
+      return &medium_move;
+      break;
+    case easy :
+      return &easy_move;
+      break;
+  }
 }
 
 Player* build_player(char piece, PlayerType type) {
-  Player* player;
-  switch (type) {
-    case human :
-      player = create_player(piece, human_strategy());
-      break;
-    case hard :
-      player = create_player(piece, hard_strategy());
-      break;
-    case medium :
-      player = create_player(piece, medium_strategy());
-      break;
-    case easy :
-      player = create_player(piece, easy_strategy());
-      break;
-  }
-  return player;
+  MoveHandler handler = get_handler(type);
+  return create_player(piece, handler);
 }
