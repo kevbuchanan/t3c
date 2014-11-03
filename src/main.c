@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include <time.h>
+#include <signal.h>
+#include <stdio.h>
 
 #include "board.h"
 #include "game.h"
@@ -7,8 +9,14 @@
 #include "player_factory.h"
 #include "config.h"
 
+void term(int signum) {
+  puts("\n\nLater\n");
+  exit(0);
+}
+
 int main(int argc, char* argv[]) {
   srand(time(NULL));
+  signal(SIGINT, term);
 
   Config config = initialize_config(argc, argv);
 
